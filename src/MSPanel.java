@@ -76,7 +76,6 @@ public class MSPanel extends JPanel implements BombListener {
 			if (gameWin()) { JOptionPane.showMessageDialog(null, "Congratulations. You win !");
 			System.exit(0); } }
 		}
-
 }
 
 
