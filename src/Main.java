@@ -11,6 +11,7 @@ public class Main {
 
 
         MSPanel ms = new MSPanel(4,4, 0.125);
+        frame.setSize(new Dimension(1000, 1000));
         frame.add(ms);
         frame.getContentPane().add(ms);
         frame.pack();

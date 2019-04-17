@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -22,14 +21,15 @@ public class MSLabel extends JLabel  {
 
 	protected void setBombsNear(int n){ cell.setBombsNear(n); }
 
-	protected int getBombsNear(){ return cell.getBombsNear(); }
+	private int getBombsNear(){ return cell.getBombsNear(); }
 
 	private void reveal(){ cell.reveal(); }
 
 	protected void addBombListener(BombListener b){ listeners.add(b); }
 
-	protected void removeBombListener(BombListener b){ listeners.remove(b); }
 
+	//
+	//protected void removeBombListener(BombListener b){ listeners.remove(b); }
 
 	private void notifyListeners(){
 		BombEvent b = new BombEvent(this);
@@ -50,10 +50,10 @@ public class MSLabel extends JLabel  {
 				reveal();
 				if (isBomb()){
 					setIcon(new ImageIcon("MineSweeperIcons/Bomb.png"));
-					notifyListeners();
 				}
-				else{
-					setIcon(new ImageIcon("MineSweeperIcons/" + getBombsNear() + ".png")); } }
+				else{ setIcon(new ImageIcon("MineSweeperIcons/" + getBombsNear() + ".png")); }
+				notifyListeners();
+			}
 		}
 
 		@Override

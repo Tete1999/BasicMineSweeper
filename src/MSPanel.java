@@ -24,23 +24,19 @@ public class MSPanel extends JPanel implements BombListener {
 		for (int i = 0; i != rows; i++) {
 			for (int j = 0; j != cols; j++) {
 				squares[i][j] = new MSLabel();
+				squares[i][j].addBombListener(this);
 				add(squares[i][j]); } }
 	}
 
 
 	private void setBombs() {
-		int a, b;
-		while (bombsToSet != 0) {
+		int a, b, count = 0;
+		while (count != bombsToSet) {
 			a = (int) (Math.random() * rows);
 			b = (int) (Math.random() * cols);
 			if (!squares[a][b].isBomb()) {
 				squares[a][b].setAsBomb();
-				squares[a][b].addBombListener(this);
-				bombsToSet -= 1; } }
-	}
-
-	public int getNum(int row, int col) {
-		return squares[row][col].getBombsNear();
+				count += 1; } }
 	}
 
 	private void setNumbers() {
@@ -55,21 +51,36 @@ public class MSPanel extends JPanel implements BombListener {
 				count = 0; } }
 	}
 
+
 	private int legality(int a, int b) {
 		int count = 0;
 		try {
-			if (squares[a][b].isBomb()) { count += 1; }
-		} catch (IndexOutOfBoundsException e) { }
+			if (squares[a][b].isBomb()) { count += 1; } }
+		catch (IndexOutOfBoundsException e) { }
 		return count;
 	}
 
-	@Override
-	public void update(BombEvent b) {
-		JOptionPane.showMessageDialog(null, "Game End");
-		System.exit(0);
+
+	private boolean gameWin() {
+		return (numShowing == (rows * cols) - bombsToSet);
 	}
 
+
+	@Override
+	public void update(BombEvent b) {
+		MSLabel m = (MSLabel) b.getSource();
+		if (m.isBomb()) {
+			JOptionPane.showMessageDialog(null, "Game End");
+			System.exit(0); }
+		else { numShowing ++;
+			if (gameWin()) { JOptionPane.showMessageDialog(null, "Congratulations. You win !");
+			System.exit(0); } }
+		}
+
 }
+
+
+
 
 
 
