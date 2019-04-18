@@ -77,7 +77,7 @@ public class MSPanel extends JPanel implements BombListener {
 		MSLabel m = (MSLabel) b.getSource();
 		if (m.isBomb()) {
 			displayAllBombs(squares);
-			JOptionPane.showMessageDialog(null, "Game End");
+			JOptionPane.showMessageDialog(null, "Oops, You Lost");
 			System.exit(0); }
 		else { numShowing ++;
 			if (gameWin()) {
