@@ -28,6 +28,12 @@ public class MSPanel extends JPanel implements BombListener {
 				add(squares[i][j]); } }
 	}
 
+	private void displayAllBombs(MSLabel[][] squares) {
+		for (int i = 0; i != rows; i++) {
+			for (int j = 0; j != cols; j++) {
+				squares[i][j].revealBomb(); } }
+	}
+
 
 	private void setBombs() {
 		int a, b, count = 0;
@@ -70,11 +76,14 @@ public class MSPanel extends JPanel implements BombListener {
 	public void update(BombEvent b) {
 		MSLabel m = (MSLabel) b.getSource();
 		if (m.isBomb()) {
+			displayAllBombs(squares);
 			JOptionPane.showMessageDialog(null, "Game End");
 			System.exit(0); }
 		else { numShowing ++;
-			if (gameWin()) { JOptionPane.showMessageDialog(null, "Congratulations. You win !");
-			System.exit(0); } }
+			if (gameWin()) {
+				displayAllBombs(squares);
+				JOptionPane.showMessageDialog(null, "Congratulations. You win !");
+			    System.exit(0); } }
 		}
 }
 

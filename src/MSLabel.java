@@ -27,6 +27,10 @@ public class MSLabel extends JLabel  {
 
 	protected void addBombListener(BombListener b){ listeners.add(b); }
 
+	protected void revealBomb(){
+		if (isBomb()){ setIcon(new ImageIcon("MineSweeperIcons/Bomb.png")); }
+	}
+
 
 	//
 	//protected void removeBombListener(BombListener b){ listeners.remove(b); }
